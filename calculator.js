@@ -7,11 +7,13 @@ const add = document.querySelector(".add")
 const minus = document.querySelector(".minus")
 const multiply = document.querySelector(".multiply")
 const divide = document.querySelector(".divide")
+const result = document.querySelector(".equal")
 
 let btnNumberInput1 = ''
 let operatorType = ''
 let calculatorDisplay = ''
 let firstInput = ''
+let secondInput = ''
 let firstInputChecker
 let haveDot = false
 let initialNumber = "0"
@@ -74,29 +76,27 @@ operators.forEach(operator => {
         operatorType = this.innerText
         firstInput = calculatorDisplay
         if (operatorType === "+") {
-            noFirstInput()
-            removeClass()
-            firstInputChecker = true
+            operatorFunction()
             add.classList.add("operatorToggle")
         } else if (operatorType === "-") {
-            noFirstInput()
-            removeClass()
-            firstInputChecker = true
+            operatorFunction()
             minus.classList.add("operatorToggle")
         } else if (operatorType === "×") {
-            noFirstInput()
-            removeClass()
-            firstInputChecker = true
+            operatorFunction()
             multiply.classList.add("operatorToggle")
         } else {
-            noFirstInput()
-            removeClass()
-            firstInputChecker = true
+            operatorFunction()
             divide.classList.add("operatorToggle")
         }
 
     })
 })
+
+function operatorFunction () {
+    noFirstInput()
+    removeClass()
+    firstInputChecker = true
+}
 
 function removeClass () {
     add.classList.remove("operatorToggle")
@@ -109,4 +109,56 @@ function noFirstInput () {
     if (display.innerText === "0") {
         firstInput = display.innerText
     }
+}
+
+result.addEventListener("click", function () {
+    secondInput = calculatorDisplay
+    firstInput = parseFloat(firstInput)
+    secondInput = parseFloat(secondInput)
+    if (operatorType === "+") {
+       outcome = operation(firstInput,secondInput,addition)
+       removeClass()
+       calculatorDisplay = outcome
+       display.innerText = calculatorDisplay
+    } else if (operatorType === "-") {
+        outcome = operation(firstInput,secondInput,deduction)
+        removeClass()
+        calculatorDisplay = outcome
+        display.innerText = calculatorDisplay
+    } else if (operatorType === "×") {
+        outcome = operation(firstInput,secondInput,multiplication)
+        removeClass()
+        calculatorDisplay = outcome
+        display.innerText = calculatorDisplay
+    } else {
+        outcome = operation(firstInput,secondInput,division)
+        removeClass()
+        calculatorDisplay = outcome
+        display.innerText = calculatorDisplay
+        if (secondInput === 0) {
+            calculatorDisplay = "∞"
+            display.innerText = calculatorDisplay
+        }
+    }
+})
+
+function addition (x, y) {
+    return x + y
+}
+
+function deduction (x, y) {
+    return x - y
+}
+
+function multiplication (x, y) {
+    return x * y
+}
+
+function division (x, y) {
+    return x / y
+    
+}
+
+function operation (x, y, operator) {
+    return operator(x, y)
 }
