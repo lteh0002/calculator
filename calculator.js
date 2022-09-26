@@ -19,14 +19,15 @@ let firstInputChecker
 let percentageInput = ''
 let haveDot = false
 let initialNumber = "0"
-let numChar
-let displayLimit
+let numChar = ''
+let percentageChecker 
 let zeroEqualChecker = false
 
 
 
 buttonNumber.forEach(number => {
     number.addEventListener("click", function () {
+
         btnNumberInput1 = this.innerText
         if (btnNumberInput1 === "0" && display.innerText === "0") {
             display.innerText = "0"
@@ -63,6 +64,7 @@ clearAll.addEventListener("click", function () {
     removeClass()
     firstInput = ''
     secondInput = ''
+    percentageChecker = ''
 })
 
 decimal.addEventListener("click", function () {
@@ -103,6 +105,7 @@ operators.forEach(operator => {
 function operatorFunction () {
     noFirstInput()
     removeClass()
+    haveDot = false
     firstInputChecker = true
 }
 
@@ -130,21 +133,28 @@ result.addEventListener("click", function () {
     secondInput = parseFloat(secondInput)
     if (operatorType === "+") {
        outcome = operation(firstInput,secondInput,addition)
+       outcome = outcome.toFixed(3)
        removeClass()
        calculatorDisplay = outcome.toString()
        display.innerText = calculatorDisplay
     } else if (operatorType === "-") {
         outcome = operation(firstInput,secondInput,deduction)
+        outcome = outcome.toFixed(3)
         removeClass()
         calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
     } else if (operatorType === "×") {
+        if (firstInput == '') {
+            secondInput = 0
+        }
         outcome = operation(firstInput,secondInput,multiplication)
+        outcome = outcome.toFixed(3)
         removeClass()
         calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
     } else {
         outcome = operation(firstInput,secondInput,division)
+        outcome = outcome.toFixed(3)
         removeClass()
         calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
@@ -162,19 +172,16 @@ result.addEventListener("click", function () {
 })
 
 percent.addEventListener("click", function () {
-    if (calculatorDisplay == '') {
+    if (calculatorDisplay == '' || percentageChecker == '0.001') {
         return;
     }
-    percentageInput = parseFloat(calculatorDisplay)
-    calculatorDisplay = division (percentageInput, 100)
-    display.innerText = calculatorDisplay
-    numChar = calculatorDisplay.length
-    if (numChar > 9) {
-        percentageResult = calculatorDisplay.substring(0,9)
-        display.innerText = percentageResult
-    }
-})
 
+    calculatorDisplay = division (calculatorDisplay, 100)
+    calculatorDisplay = calculatorDisplay.toFixed(3)
+    percentageChecker = calculatorDisplay
+    display.innerText = calculatorDisplay
+
+})
 
 function addition (x, y) {
     return x + y
