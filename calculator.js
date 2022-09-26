@@ -18,6 +18,10 @@ let firstInputChecker
 let haveDot = false
 let initialNumber = "0"
 let numChar
+let displayLimit
+let zeroEqualChecker = false
+
+
 
 buttonNumber.forEach(number => {
     number.addEventListener("click", function () {
@@ -45,7 +49,6 @@ buttonNumber.forEach(number => {
         }
 
     })
-    
 })
 
 clearAll.addEventListener("click", function () {
@@ -53,8 +56,11 @@ clearAll.addEventListener("click", function () {
     calculatorDisplay = ''
     decimalInput = ''
     haveDot = false
+    operatorType = ''
     display.innerText = "0"
     removeClass()
+    firstInput = ''
+    secondInput = ''
 })
 
 decimal.addEventListener("click", function () {
@@ -108,37 +114,50 @@ function removeClass () {
 function noFirstInput () {
     if (display.innerText === "0") {
         firstInput = display.innerText
+        result.removeEventListener("click")
     }
+    
 }
+
 
 result.addEventListener("click", function () {
     secondInput = calculatorDisplay
+    if (firstInput == '') {
+        return;
+    }
+
     firstInput = parseFloat(firstInput)
     secondInput = parseFloat(secondInput)
     if (operatorType === "+") {
        outcome = operation(firstInput,secondInput,addition)
        removeClass()
-       calculatorDisplay = outcome
+       calculatorDisplay = outcome.toString()
        display.innerText = calculatorDisplay
     } else if (operatorType === "-") {
         outcome = operation(firstInput,secondInput,deduction)
         removeClass()
-        calculatorDisplay = outcome
+        calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
     } else if (operatorType === "×") {
         outcome = operation(firstInput,secondInput,multiplication)
         removeClass()
-        calculatorDisplay = outcome
+        calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
     } else {
         outcome = operation(firstInput,secondInput,division)
         removeClass()
-        calculatorDisplay = outcome
+        calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
         if (secondInput === 0) {
             calculatorDisplay = "∞"
             display.innerText = calculatorDisplay
         }
+    }
+
+    numChar = calculatorDisplay.length
+    if (numChar > 9) {
+        calculatorDisplay = calculatorDisplay.substring(0,9)
+        display.innerText = calculatorDisplay
     }
 })
 
