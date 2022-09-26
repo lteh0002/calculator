@@ -7,6 +7,7 @@ const add = document.querySelector(".add")
 const minus = document.querySelector(".minus")
 const multiply = document.querySelector(".multiply")
 const divide = document.querySelector(".divide")
+const percent = document.querySelector(".percent")
 const result = document.querySelector(".equal")
 
 let btnNumberInput1 = ''
@@ -15,6 +16,7 @@ let calculatorDisplay = ''
 let firstInput = ''
 let secondInput = ''
 let firstInputChecker
+let percentageInput = ''
 let haveDot = false
 let initialNumber = "0"
 let numChar
@@ -114,11 +116,9 @@ function removeClass () {
 function noFirstInput () {
     if (display.innerText === "0") {
         firstInput = display.innerText
-        result.removeEventListener("click")
     }
     
 }
-
 
 result.addEventListener("click", function () {
     secondInput = calculatorDisplay
@@ -161,6 +161,21 @@ result.addEventListener("click", function () {
     }
 })
 
+percent.addEventListener("click", function () {
+    if (calculatorDisplay == '') {
+        return;
+    }
+    percentageInput = parseFloat(calculatorDisplay)
+    calculatorDisplay = division (percentageInput, 100)
+    display.innerText = calculatorDisplay
+    numChar = calculatorDisplay.length
+    if (numChar > 9) {
+        percentageResult = calculatorDisplay.substring(0,9)
+        display.innerText = percentageResult
+    }
+})
+
+
 function addition (x, y) {
     return x + y
 }
@@ -175,7 +190,6 @@ function multiplication (x, y) {
 
 function division (x, y) {
     return x / y
-    
 }
 
 function operation (x, y, operator) {
