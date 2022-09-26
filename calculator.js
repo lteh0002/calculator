@@ -154,7 +154,6 @@ result.addEventListener("click", function () {
         display.innerText = calculatorDisplay
     } else {
         outcome = operation(firstInput,secondInput,division)
-        outcome = outcome.toFixed(3)
         removeClass()
         calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
