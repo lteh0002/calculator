@@ -24,8 +24,7 @@ let numChar = ''
 let percentageChecker 
 let zeroEqualChecker = false
 let deleteAllower = true
-
-
+let disallowInput = false
 
 buttonNumber.forEach(number => {
     number.addEventListener("click", function () {
@@ -52,12 +51,12 @@ buttonNumber.forEach(number => {
             display.innerText = calculatorDisplay
         }
 
-        if (!firstInputChecker) {
+        if (disallowInput) {
+            disallowInput = false
             calculatorDisplay = ''
             calculatorDisplay += btnNumberInput1
             display.innerText = calculatorDisplay
         }
-
     })
 })
 
@@ -73,6 +72,7 @@ clearAll.addEventListener("click", function () {
     secondInput = ''
     percentageChecker = ''
     deleteAllower = true
+    disallowInput = false
 })
 
 decimal.addEventListener("click", function () {
@@ -134,6 +134,7 @@ function noFirstInput () {
 
 result.addEventListener("click", function () {
     deleteAllower = false
+    disallowInput = true
     secondInput = calculatorDisplay
     if (firstInput == '') {
         return;
