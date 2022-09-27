@@ -7,7 +7,7 @@ const add = document.querySelector(".add")
 const minus = document.querySelector(".minus")
 const multiply = document.querySelector(".multiply")
 const divide = document.querySelector(".divide")
-const percent = document.querySelector(".percent")
+const negative = document.querySelector(".negative")
 const result = document.querySelector(".equal")
 const backspace = document.querySelector(".clear")
 
@@ -37,7 +37,7 @@ buttonNumber.forEach(number => {
         }
 
         numChar = calculatorDisplay.length
-        if (numChar > 9) {
+        if (numChar > 12) {
             charLimit = calculatorDisplay.slice(0, -1)
             calculatorDisplay = charLimit
             display.innerText = calculatorDisplay
@@ -111,6 +111,15 @@ operators.forEach(operator => {
     })
 })
 
+negative.addEventListener("click", function () {
+    calculatorDisplay = parseFloat(turnNegative(calculatorDisplay))
+    display.innerText = calculatorDisplay
+    if (display.innerText === '0') {
+        calculatorDisplay = ''
+        display.innerText === calculatorDisplay
+    }
+})
+
 function operatorFunction () {
     noFirstInput()
     removeClass()
@@ -159,11 +168,13 @@ result.addEventListener("click", function () {
         outcome = operation(firstInput,secondInput,multiplication)
         removeClass()
         calculatorDisplay = outcome.toString()
+        calculatorDisplay = parseFloat(calculatorDisplay.substring(0,12))
         display.innerText = calculatorDisplay
     } else {
         outcome = operation(firstInput,secondInput,division)
         removeClass()
         calculatorDisplay = outcome.toString()
+        calculatorDisplay = parseFloat(calculatorDisplay.substring(0,12))
         display.innerText = calculatorDisplay
         if (secondInput === 0) {
             calculatorDisplay = "∞"
@@ -176,21 +187,6 @@ result.addEventListener("click", function () {
         calculatorDisplay = calculatorDisplay.substring(0,9)
         display.innerText = calculatorDisplay
     }
-})
-
-percent.addEventListener("click", function () {
-    if (calculatorDisplay == '' || percentageChecker == '0.001') { 
-        return;
-    }
-
-    if (percentageChecker == '0.010' || percentageChecker == '0.020'|| percentageChecker == '0.030' || percentageChecker == '0.040') {
-        return;
-    }
-
-    calculatorDisplay = division (calculatorDisplay, 100)
-    calculatorDisplay = calculatorDisplay.toFixed(3)
-    percentageChecker = calculatorDisplay
-    display.innerText = calculatorDisplay
 })
 
 backspace.addEventListener("click", function() {
@@ -222,6 +218,10 @@ function multiplication (x, y) {
 
 function division (x, y) {
     return x / y
+}
+
+function turnNegative (x) {
+    return x * -1
 }
 
 function operation (x, y, operator) {

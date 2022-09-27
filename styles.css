@@ -9,8 +9,8 @@
 }
 
 .display {
-    width: 280px;
-    height: 100px;
+    width: 360px;
+    height: 150px;
     margin: auto;
     background-color: #1C1C1C;
     font-size: 3rem;
@@ -26,15 +26,18 @@
 }
 
 button {
-    height: 70px;
-    width: 70px;
+    height: 90px;
+    width: 90px;
     font-size: 25px;
 }
 
 .zero {
-    width: 140px;
+    width: 180px;
 }
 
+.clear {
+    font-size: 23px;
+}
 
 
 p {
@@ -44,10 +47,6 @@ p {
     padding-right: 10px;
 }
 
-.clear {
-    font-weight: 500;
-    height: 70px;
-}
 
 .operatorToggle {
     border: 2px solid black;
