@@ -17,11 +17,9 @@ let calculatorDisplay = ''
 let firstInput = ''
 let secondInput = ''
 let firstInputChecker
-let percentageInput = ''
 let haveDot = false
 let initialNumber = "0"
 let numChar = ''
-let percentageChecker 
 let zeroEqualChecker = false
 let deleteAllower = true
 let disallowInput = false
