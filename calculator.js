@@ -9,6 +9,7 @@ const multiply = document.querySelector(".multiply")
 const divide = document.querySelector(".divide")
 const percent = document.querySelector(".percent")
 const result = document.querySelector(".equal")
+const backspace = document.querySelector(".clear")
 
 let btnNumberInput1 = ''
 let operatorType = ''
@@ -22,12 +23,12 @@ let initialNumber = "0"
 let numChar = ''
 let percentageChecker 
 let zeroEqualChecker = false
+let deleteAllower = true
 
 
 
 buttonNumber.forEach(number => {
     number.addEventListener("click", function () {
-
         btnNumberInput1 = this.innerText
         if (btnNumberInput1 === "0" && display.innerText === "0") {
             display.innerText = "0"
@@ -51,6 +52,12 @@ buttonNumber.forEach(number => {
             display.innerText = calculatorDisplay
         }
 
+        if (!firstInputChecker) {
+            calculatorDisplay = ''
+            calculatorDisplay += btnNumberInput1
+            display.innerText = calculatorDisplay
+        }
+
     })
 })
 
@@ -65,6 +72,7 @@ clearAll.addEventListener("click", function () {
     firstInput = ''
     secondInput = ''
     percentageChecker = ''
+    deleteAllower = true
 })
 
 decimal.addEventListener("click", function () {
@@ -83,6 +91,7 @@ decimal.addEventListener("click", function () {
 
 operators.forEach(operator => {
     operator.addEventListener("click", function () { 
+        deleteAllower = true
         operatorType = this.innerText
         firstInput = calculatorDisplay
         if (operatorType === "+") {
@@ -124,6 +133,7 @@ function noFirstInput () {
 }
 
 result.addEventListener("click", function () {
+    deleteAllower = false
     secondInput = calculatorDisplay
     if (firstInput == '') {
         return;
@@ -168,7 +178,11 @@ result.addEventListener("click", function () {
 })
 
 percent.addEventListener("click", function () {
-    if (calculatorDisplay == '' || percentageChecker == '0.001') {
+    if (calculatorDisplay == '' || percentageChecker == '0.001') { 
+        return;
+    }
+
+    if (percentageChecker == '0.010' || percentageChecker == '0.020'|| percentageChecker == '0.030' || percentageChecker == '0.040') {
         return;
     }
 
@@ -176,8 +190,22 @@ percent.addEventListener("click", function () {
     calculatorDisplay = calculatorDisplay.toFixed(3)
     percentageChecker = calculatorDisplay
     display.innerText = calculatorDisplay
-
 })
+
+backspace.addEventListener("click", function() {
+    if (deleteAllower) {
+        calculatorDisplay = calculatorDisplay.slice(0, -1);
+        display.innerText = calculatorDisplay
+    } else if (!deleteAllower) {
+        return
+    }
+
+    if (calculatorDisplay.length < 1) {
+        calculatorDisplay = ''
+        display.innerText = 0
+    }
+})
+
 
 function addition (x, y) {
     return x + y
