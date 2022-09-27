@@ -133,13 +133,11 @@ result.addEventListener("click", function () {
     secondInput = parseFloat(secondInput)
     if (operatorType === "+") {
        outcome = operation(firstInput,secondInput,addition)
-       outcome = outcome.toFixed(3)
        removeClass()
        calculatorDisplay = outcome.toString()
        display.innerText = calculatorDisplay
     } else if (operatorType === "-") {
         outcome = operation(firstInput,secondInput,deduction)
-        outcome = outcome.toFixed(3)
         removeClass()
         calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
@@ -148,7 +146,6 @@ result.addEventListener("click", function () {
             secondInput = 0
         }
         outcome = operation(firstInput,secondInput,multiplication)
-        outcome = outcome.toFixed(3)
         removeClass()
         calculatorDisplay = outcome.toString()
         display.innerText = calculatorDisplay
