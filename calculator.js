@@ -33,7 +33,21 @@ buttonNumber.forEach(number => {
 })
 
 document.addEventListener("keydown", function(e){
-    switch (btnNumberInput1 = e.key) {
+    if (e.shiftKey) {
+        switch (e.key) {
+            case '+':
+                operatorType = '+'
+                operatorToggle ()
+            break;
+
+            case '*':
+                operatorType = '×'
+                operatorToggle ()
+            break;
+        }
+    }
+
+    switch (e.key) {
         case '0':
         case '1':
         case '2':
@@ -44,17 +58,31 @@ document.addEventListener("keydown", function(e){
         case '7':
         case '8':
         case '9':
+            btnNumberInput1 = e.key
             calculationFunction()
         break;
 
         case 'Backspace':
             backSpace()
         break;
-        
+
+        case 'Enter':
+            mathOperation()
+        break;
+
+        case '-':
+        case '/':
+            operatorType = e.key
+            operatorToggle ()
+        break;
+
+        case 'Shift':
+        break;
+
         default:
             return;
     }
-    
+
 })
 
 function calculationFunction () {
