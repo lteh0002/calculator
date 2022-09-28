@@ -16,6 +16,7 @@ let operatorType = ''
 let calculatorDisplay = ''
 let firstInput = ''
 let secondInput = ''
+let negativeNumber = ''
 let firstInputChecker
 let haveDot = false
 let initialNumber = "0"
@@ -110,7 +111,9 @@ operators.forEach(operator => {
 })
 
 negative.addEventListener("click", function () {
-    calculatorDisplay = parseFloat(turnNegative(calculatorDisplay))
+    haveDot = false
+    negativeNumber = parseFloat(turnNegative(calculatorDisplay))
+    calculatorDisplay = negativeNumber.toString()
     display.innerText = calculatorDisplay
     if (display.innerText === '0') {
         calculatorDisplay = ''
