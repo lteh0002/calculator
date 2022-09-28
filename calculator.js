@@ -28,36 +28,65 @@ let disallowInput = false
 buttonNumber.forEach(number => {
     number.addEventListener("click", function () {
         btnNumberInput1 = this.innerText
-        if (btnNumberInput1 === "0" && display.innerText === "0") {
-            display.innerText = "0"
-        } else {
-            calculatorDisplay += btnNumberInput1
-            display.innerText = calculatorDisplay
-        }
-
-        numChar = calculatorDisplay.length
-        if (numChar > 12) {
-            charLimit = calculatorDisplay.slice(0, -1)
-            calculatorDisplay = charLimit
-            display.innerText = calculatorDisplay
-            haveDot = true
-        }
-
-        if (firstInputChecker) {
-            firstInputChecker = false
-            calculatorDisplay = ''
-            calculatorDisplay += btnNumberInput1
-            display.innerText = calculatorDisplay
-        }
-
-        if (disallowInput) {
-            disallowInput = false
-            calculatorDisplay = ''
-            calculatorDisplay += btnNumberInput1
-            display.innerText = calculatorDisplay
-        }
+        calculationFunction()
     })
 })
+
+document.addEventListener("keydown", function(e){
+    switch (btnNumberInput1 = e.key) {
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            calculationFunction()
+        break;
+
+        case 'Backspace':
+            backSpace()
+        break;
+        
+        default:
+            return;
+    }
+    
+})
+
+function calculationFunction () {
+    if (btnNumberInput1 === "0" && display.innerText === "0") {
+        display.innerText = "0"
+    } else {
+        calculatorDisplay += btnNumberInput1
+        display.innerText = calculatorDisplay
+    }
+
+    numChar = calculatorDisplay.length
+    if (numChar > 12) {
+        charLimit = calculatorDisplay.slice(0, -1)
+        calculatorDisplay = charLimit
+        display.innerText = calculatorDisplay
+        haveDot = true
+    }
+
+    if (firstInputChecker) {
+        firstInputChecker = false
+        calculatorDisplay = ''
+        calculatorDisplay += btnNumberInput1
+        display.innerText = calculatorDisplay
+    }
+
+    if (disallowInput) {
+        disallowInput = false
+        calculatorDisplay = ''
+        calculatorDisplay += btnNumberInput1
+        display.innerText = calculatorDisplay
+    }
+}
 
 clearAll.addEventListener("click", function () {
     btnNumberInput1 = ''
@@ -90,25 +119,28 @@ decimal.addEventListener("click", function () {
 
 operators.forEach(operator => {
     operator.addEventListener("click", function () { 
-        deleteAllower = true
         operatorType = this.innerText
-        firstInput = calculatorDisplay
-        if (operatorType === "+") {
-            operatorFunction()
-            add.classList.add("operatorToggle")
-        } else if (operatorType === "-") {
-            operatorFunction()
-            minus.classList.add("operatorToggle")
-        } else if (operatorType === "×") {
-            operatorFunction()
-            multiply.classList.add("operatorToggle")
-        } else {
-            operatorFunction()
-            divide.classList.add("operatorToggle")
-        }
-
+        operatorToggle()
     })
 })
+
+function operatorToggle () {
+    deleteAllower = true
+    firstInput = calculatorDisplay
+    if (operatorType === "+") {
+        operatorFunction()
+        add.classList.add("operatorToggle")
+    } else if (operatorType === "-") {
+        operatorFunction()
+        minus.classList.add("operatorToggle")
+    } else if (operatorType === "×") {
+        operatorFunction()
+        multiply.classList.add("operatorToggle")
+    } else {
+        operatorFunction()
+        divide.classList.add("operatorToggle")
+    }
+}
 
 negative.addEventListener("click", function () {
     haveDot = false
@@ -143,6 +175,28 @@ function noFirstInput () {
 }
 
 result.addEventListener("click", function () {
+    mathOperation()
+})
+
+backspace.addEventListener("click", function() {
+    backSpace()
+})
+
+function backSpace() {
+    if (deleteAllower) {
+        calculatorDisplay = calculatorDisplay.slice(0, -1);
+        display.innerText = calculatorDisplay
+    } else if (!deleteAllower) {
+        return
+    }
+
+    if (calculatorDisplay.length < 1) {
+        calculatorDisplay = ''
+        display.innerText = 0
+    }
+}
+
+function mathOperation () {
     deleteAllower = false
     disallowInput = true
     secondInput = calculatorDisplay
@@ -188,21 +242,7 @@ result.addEventListener("click", function () {
         calculatorDisplay = calculatorDisplay.substring(0,9)
         display.innerText = calculatorDisplay
     }
-})
-
-backspace.addEventListener("click", function() {
-    if (deleteAllower) {
-        calculatorDisplay = calculatorDisplay.slice(0, -1);
-        display.innerText = calculatorDisplay
-    } else if (!deleteAllower) {
-        return
-    }
-
-    if (calculatorDisplay.length < 1) {
-        calculatorDisplay = ''
-        display.innerText = 0
-    }
-})
+}
 
 
 function addition (x, y) {
