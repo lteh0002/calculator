@@ -77,7 +77,9 @@ document.addEventListener("keydown", function(e){
             operatorToggle ()
         break;
 
-        case 'Shift':
+        case '.':
+            decimalInput = e.key
+            addDecimal ()
         break;
 
         default:
@@ -134,6 +136,10 @@ clearAll.addEventListener("click", function () {
 
 decimal.addEventListener("click", function () {
     decimalInput = this.innerText
+    addDecimal()
+})
+
+function addDecimal () {
     if (display.innerText === '0' && !haveDot) {
         calculatorDisplay = initialNumber + decimalInput
         display.innerText = calculatorDisplay
@@ -144,7 +150,7 @@ decimal.addEventListener("click", function () {
         display.innerText = calculatorDisplay
         haveDot = true
     } 
-})
+}
 
 operators.forEach(operator => {
     operator.addEventListener("click", function () { 
