@@ -26,8 +26,8 @@ let deleteAllower = true
 let disallowInput = false
 
 buttonNumber.forEach(number => {
-    number.addEventListener("click", function () {
-        btnNumberInput1 = this.innerText
+    number.addEventListener("click", (e) => {
+        btnNumberInput1 = e.target.innerText
         calculationFunction()
     })
 })
@@ -70,6 +70,7 @@ document.addEventListener("keydown", function(e){
             mathOperation()
         break;
 
+        case '+':
         case '-':
         case '/':
             operatorType = e.key
