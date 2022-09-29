@@ -67,6 +67,7 @@ document.addEventListener("keydown", function(e){
         break;
 
         case 'Enter':
+        case 'Return':
             mathOperation()
         break;
 
