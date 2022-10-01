@@ -4,6 +4,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+    background-image: url('images/background.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 .calculator {
     padding-top: 10vh;
 }
@@ -35,7 +42,7 @@ button {
     width: 180px;
 }
 
-p {
+.calc-display {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -45,4 +52,25 @@ p {
 
 .operatorToggle {
     border: 1.5px solid black;
+}
+
+.note {
+    position: absolute;
+    right: 100px;
+    top: 70px;
+    width: 300px;
+    text-align: justify;
+    background-color: white;
+    max-width: 500px;
+}
+
+.footer {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.github {
+    width: 20px;
+    height: 20px;
 }
