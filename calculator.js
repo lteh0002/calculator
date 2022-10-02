@@ -93,8 +93,7 @@ function calculationFunction () {
     if (btnNumberInput1 === "0" && display.innerText === "0") {
         display.innerText = "0"
     } else {
-        calculatorDisplay += btnNumberInput1
-        display.innerText = calculatorDisplay
+        appendNumber ()
     }
 
     numChar = calculatorDisplay.length
@@ -108,16 +107,19 @@ function calculationFunction () {
     if (firstInputChecker) {
         firstInputChecker = false
         calculatorDisplay = ''
-        calculatorDisplay += btnNumberInput1
-        display.innerText = calculatorDisplay
+        appendNumber ()
     }
 
     if (disallowInput) {
         disallowInput = false
         calculatorDisplay = ''
-        calculatorDisplay += btnNumberInput1
-        display.innerText = calculatorDisplay
+        appendNumber ()
     }
+}
+
+function appendNumber () {
+    calculatorDisplay += btnNumberInput1
+    display.innerText = calculatorDisplay
 }
 
 clearAll.addEventListener("click", function () {
@@ -147,8 +149,7 @@ function addDecimal () {
     }
 
     if (!calculatorDisplay.includes(".") && !haveDot) {
-        calculatorDisplay += decimalInput
-        display.innerText = calculatorDisplay
+        appendNumber()
         haveDot = true
     } 
 }
@@ -279,7 +280,6 @@ function mathOperation () {
         display.innerText = calculatorDisplay
     }
 }
-
 
 function addition (x, y) {
     return x + y
