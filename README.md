@@ -1,5 +1,5 @@
 # Calculator
-A on-screen calculator created to demonstrate my knowledge in the fundamentals of Vanilla JavaScript, HTML and CSS The Odin Project curriculum.
+A on-screen calculator created to demonstrate my knowledge in the fundamentals of Vanilla JavaScript, HTML and CSS from The Odin Project.curriculum.
 
 # Description of the project
 This is a simple JavaScript-powered calculator similar to a small handheld calculator which allows users to perform simple maths operation such as addition, subtraction, division and multiplication.
