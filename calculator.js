@@ -213,6 +213,8 @@ function noFirstInput () {
 
 result.addEventListener("click", function () {
     mathOperation()
+    firstInput = ''
+    secondInput = ''
 })
 
 backspace.addEventListener("click", function() {
