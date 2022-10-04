@@ -28,6 +28,7 @@ let disallowInput = false
 buttonNumber.forEach(number => {
     number.addEventListener("click", (e) => {
         btnNumberInput1 = e.target.innerText
+        number.blur()
         calculationFunction()
     })
 })
@@ -135,10 +136,12 @@ clearAll.addEventListener("click", function () {
     percentageChecker = ''
     deleteAllower = true
     disallowInput = false
+    clearAll.blur()
 })
 
 decimal.addEventListener("click", function () {
     decimalInput = this.innerText
+    decimal.blur()
     addDecimal()
 })
 
@@ -149,14 +152,22 @@ function addDecimal () {
     }
 
     if (!calculatorDisplay.includes(".") && !haveDot) {
-        appendNumber()
+        calculatorDisplay += decimalInput
+        display.innerText = calculatorDisplay
         haveDot = true
     } 
+
+    if (disallowInput) {
+        disallowInput = false
+        calculatorDisplay = initialNumber + decimalInput
+        display.innerText = calculatorDisplay
+    }
 }
 
 operators.forEach(operator => {
     operator.addEventListener("click", function () { 
         operatorType = this.innerText
+        operator.blur()
         operatorToggle()
     })
 })
@@ -184,6 +195,7 @@ negative.addEventListener("click", function () {
     negativeNumber = parseFloat(turnNegative(calculatorDisplay))
     calculatorDisplay = negativeNumber.toString()
     display.innerText = calculatorDisplay
+    negative.blur()
     if (display.innerText === '0') {
         calculatorDisplay = ''
         display.innerText === calculatorDisplay
@@ -213,11 +225,13 @@ function noFirstInput () {
 
 result.addEventListener("click", function () {
     mathOperation()
+    result.blur()
     firstInput = ''
     secondInput = ''
 })
 
 backspace.addEventListener("click", function() {
+    backspace.blur()
     backSpace()
 })
 
